@@ -1,0 +1,10 @@
+uvicorn
+requests
+pandas
+scikit-learn
+xgboost
+nest_asyncio
+joblib
+fastapi
+python-dotenv
+pydantic
