@@ -1,94 +1,46 @@
-# Lendable-loan-api-pred - FastAPI Deployment 🚀
-📍 Overview
+# Lendable Loan API Predictor 🚀
 
-This project is an end-to-end machine learning model deployment using FastAPI. The model predicts the likelihood of loan success based on financial data. The API is deployed via Ngrok for external access and includes unit tests for validation.
+## Overview
 
-📌 Table of Contents
+This project is an end-to-end machine learning model deployment using **FastAPI**. The model predicts the likelihood of loan success based on financial data. The API includes unit tests for validation.
 
-    Installation
-    Project Structure
-    How to Run the API
-    Testing the API
-    Endpoints
-    Project Details
-    Authors & Contact
+## Table of Contents
+```
+- [Installation](#installation)
+- [Project Structure](#project-structure)
+- [How to Run the API](#how-to-run-the-api)
+- [Testing the API](#testing-the-api)
+- [Endpoints](#endpoints)
+- [Project Details](#project-details)
+- [Authors & Contact](#authors--contact)
+```
+## Installation
 
-📌 Installation
+Clone the repository and install the required dependencies:
 
-Clone the repository and install the required dependencies.
-
-```plaintext
-git clone git@github.com:your-username/loan-prediction-api.git
-cd loan-prediction-api
+```bash
+git clone git@github.com:your-username/lendable-loan-api-pred.git
+cd lendable-loan-api-pred
 pip install -r requirements.txt
 ```
-For Google Colab, install dependencies inside the notebook:
-
+Run the FastAPI server using Uvicorn:
 ```
-!pip install fastapi uvicorn requests pandas joblib pyngrok unittest
+uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
 ```
-
-📌 Project Structure
-
-## 📂 Project Structure
-```plaintext
-loan-prediction-api/
-│── model/
-│   ├── loan_success_model.joblib   # Trained model
-│── api/
-│   ├── main.py                     # FastAPI application
-│   ├── schema.py                   # Pydantic validation models
-│── tests/
-│   ├── test_api.py                  # Unit tests
-│── notebooks/
-│   ├── model_training.ipynb         # Model training & evaluation
-│── requirements.txt                 # Required libraries
-│── README.md                        # Project documentation
+Ensure all dependencies are installed:
+```
+pip install -r requirements.txt
 ```
 
-📌 How to Run the API
-
-1️⃣ Start FastAPI server
+Then run the application:
 ```
 uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-For Google Colab, run:
+Description:
+Predicts loan success based on provided financial data.
 ```
-import threading
-import uvicorn
-
-def run():
-    uvicorn.run(app, host="0.0.0.0", port=8000)
-
-thread = threading.Thread(target=run, daemon=True)
-thread.start()
-```
-2️⃣ Start Ngrok to expose API externally
-```
-from pyngrok import ngrok
-public_url = ngrok.connect(8000)
-print(f"Public Ngrok URL: {public_url}")
-```
-
-📌 Testing the API
-
-```
-Run unit tests to validate the API:
-
-python -m unittest tests/test_api.py
-```
-
-For Google Colab:
-```
-!python -m unittest discover -s tests
-```
-
-📌 Endpoints
-Method	Endpoint	Description
-POST	/predict/	Loan success prediction
-```
-Example POST request:
+Example Request:
 
 {
     "Amount": 5000,
@@ -97,23 +49,36 @@ Example POST request:
     "ALL_AgeOfOldestAccount": 120,
     "ALL_AgeOfYoungestAccount": 12,
     "ALL_Count": 10,
-    "ALL_CountActive": 5
+    "ALL_CountActive": 5,
+    "ALL_CountClosedLast12Months": 0,
+    "ALL_CountDefaultAccounts": 0,
+    "ALL_CountOpenedLast12Months": 0,
+    "ALL_CountSettled": 0,
+    "ALL_MeanAccountAge": 60,
+    "ALL_SumCurrentOutstandingBal": 10000,
+    "ALL_SumCurrentOutstandingBalExcMtg": 5000,
+    "ALL_TimeSinceMostRecentDefault": 0,
+    "ALL_WorstPaymentStatusActiveAccounts": 1
 }
 ```
-Example response
+Example Response:
 ```
 {"prediction": 1}
 ```
-📌 Project Details
+Project Details
 
     Model Type: Gradient Boosted Tree
     API Framework: FastAPI
-    Deployment: Google Colab + Ngrok
+    Deployment: Google Colab & VS Code
     Testing Framework: Unittest
 
+Final Notes
 
-✅ Final Notes
+    Reproducibility: The project includes a Colab notebook and API scripts for easy reproducibility.
+    Best Practices: All code adheres to production best practices.
 
-    Ensure Ngrok authentication is correctly set up.
-    Provide Colab notebook + API scripts for easy reproducibility.
-    All code follows production best practices.
+
+
+
+
+
